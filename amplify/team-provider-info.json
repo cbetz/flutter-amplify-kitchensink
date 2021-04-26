@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-flutterkitchensink-dev-134729-authRole",
+      "UnauthRoleArn": "arn:aws:iam::795368831530:role/amplify-flutterkitchensink-dev-134729-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::795368831530:role/amplify-flutterkitchensink-dev-134729-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-flutterkitchensink-dev-134729-deployment",
+      "UnauthRoleName": "amplify-flutterkitchensink-dev-134729-unauthRole",
+      "StackName": "amplify-flutterkitchensink-dev-134729",
+      "StackId": "arn:aws:cloudformation:us-east-1:795368831530:stack/amplify-flutterkitchensink-dev-134729/79f57ed0-a6b7-11eb-9317-0a637f9cba95",
+      "AmplifyAppId": "d2j7oekl2oklku"
+    }
+  }
+}
