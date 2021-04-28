@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
+
+// Amplify Flutter Packages
+import 'package:amplify_flutter/amplify.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+
+// Generated in previous step
+import 'amplifyconfiguration.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,17 +54,58 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  AuthUser _user;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+  @override
+  initState() {
+    super.initState();
+    _configureAmplify().then((_) {
+      Amplify.Auth.getCurrentUser().then((user) {
+        setState(() {
+          _user = user;
+        });
+      }).catchError((error) {
+        log((error as AuthException).message);
+      });
     });
+  }
+
+  Future<void> _configureAmplify() async {
+    // Add Amplify Plugins
+    AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
+    Amplify.addPlugins([authPlugin]);
+
+    // Once Plugins are added, configure Amplify
+    // Note: Amplify can only be configured once.
+    try {
+      await Amplify.configure(amplifyconfig);
+    } on AmplifyAlreadyConfiguredException {
+      log("Tried to reconfigure Amplify; this can occur when your app restarts on Android.");
+    }
+  }
+
+  void _onLoginPressed() async {
+    try {
+      await Amplify.Auth.signInWithWebUI();
+      AuthUser authUser = await Amplify.Auth.getCurrentUser();
+
+      setState(() {
+        _user = authUser;
+      });
+    } on AuthException catch (e) {
+      log(e.message);
+    }
+  }
+
+  void _onLogoutPressed() async {
+    try {
+      await Amplify.Auth.signOut();
+      setState(() {
+        _user = null;
+      });
+    } on AuthException catch (e) {
+      log(e.message);
+    }
   }
 
   @override
@@ -93,21 +142,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Text(_user != null ? _user.username : ""),
+            new MaterialButton(
+                child: _user != null ? Text("Sign Out") : Text("Sign In"),
+                onPressed: _user != null ? _onLogoutPressed : _onLoginPressed),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

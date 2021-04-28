@@ -10,6 +10,11 @@
       "StackName": "amplify-flutterkitchensink-dev-134729",
       "StackId": "arn:aws:cloudformation:us-east-1:795368831530:stack/amplify-flutterkitchensink-dev-134729/79f57ed0-a6b7-11eb-9317-0a637f9cba95",
       "AmplifyAppId": "d2j7oekl2oklku"
+    },
+    "categories": {
+      "auth": {
+        "flutterkitchensink74eb44b2": {}
+      }
     }
   }
 }

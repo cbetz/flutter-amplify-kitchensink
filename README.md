@@ -1,16 +1,13 @@
-# flutter_amplify_kitchensink
+# Flutter Amplify Kitchensink
 
 Bringing everything but the kitchen sink with Flutter and Amplify
 
-## Getting Started
+## Project Goal
 
-This project is a starting point for a Flutter application.
+This goal of this project is to showcase all of the functionality of the Amplify Flutter library on both iOS and Android.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [ ] Analytics
+- [ ] API
+- [x] Authentication
+- [ ] DataStore
+- [ ] Storage
